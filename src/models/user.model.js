@@ -52,7 +52,7 @@ const userSchema = new Schema(
 // function keyword is important bc arrow fn doesnt have reference of `this` and thus it wont have the values of userschema but is needed
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
-    this.password = bcrypt.hash(this.password, 7);
+    this.password = await bcrypt.hash(this.password, 7);
   }
   next();
 });
