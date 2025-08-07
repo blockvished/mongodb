@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import connectDB from './db/index.js';
 import { app } from './app.js';
 
-dotenv.config({ path: './env' });
+dotenv.config({ path: './.env' }); // i think .env config is not required and directly read by the project
 
 const PORT = process.env.PORT || 8000;
 connectDB()
