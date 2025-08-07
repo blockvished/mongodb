@@ -7,8 +7,8 @@ import { ApiResponse } from '../utils/ApiResponse.js';
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
     const user = await User.findById(userId);
-    const accessToken = user.generateAccessToken();
-    const refreshToken = user.generateRefreshToken();
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
@@ -30,7 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // check if user created
   // return response
   const { fullName, email, username, password } = req.body;
-  console.log(email);
+  // console.log(email);
 
   // simple validation but can do more like email etc
   if (
@@ -110,7 +110,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const isPasswordValid = await user.isPasswordCorrect(password);
 
-  console.log(isPasswordValid);
+  // console.log(isPasswordValid);
 
   if (!isPasswordValid) {
     throw new ApiError(401, 'invalid user credential');
@@ -130,6 +130,8 @@ const loginUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: true,
   };
+
+  // console.log(accessToken, refreshToken);
 
   return res
     .status(200)
