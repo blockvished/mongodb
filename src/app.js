@@ -11,4 +11,10 @@ app.use(express.urlencoded({ extended: true, limit: '16kb' }));
 app.use(express.static('public')); // storing on my own server if done so
 app.use(cookieParser()); // secure access or set on user's browser, only server can do crud on it
 
+// routes
+import userRouter from './routes/user.routes.js';
+
+// routes declaration
+app.use('/api/v1/users', userRouter); // localhost:port/api/v1/users/register
+
 export { app };
