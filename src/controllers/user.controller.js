@@ -408,4 +408,6 @@ export {
   changeCurrentPassword,
   updateCurrentUser,
   updateUserAvatar,
+  getUserChannelProfile,
+  getWatchHistory,
 };
